@@ -291,7 +291,7 @@ useEffect(() => {
 
       theName == "F_" && majorScale[6] == "F_" ?   
               
-      <TouchableOpacity style={{height: 40}}
+      <TouchableOpacity style={{height: 40, width:60}}
       key={index}
       onPress={event => {
         console.log(`${index}: ${theName}`);
@@ -332,7 +332,7 @@ useEffect(() => {
                     : majorScale.indexOf(theName) + mode == 0
                     ? "7"
                     : majorScale.indexOf(theName) + mode}</Text>
-    </TouchableOpacity>) : <TouchableOpacity style= {{opacity: 0, marginLeft: 27, }}
+    </TouchableOpacity>) : <TouchableOpacity style= {{opacity: 0, marginLeft: 24,flex:1,height:40, }}
       key={index}
       onPress={event => {
         console.log(`${index}: ${theName}`);
@@ -383,7 +383,7 @@ useEffect(() => {
     theName ==minorScale[5] ||
     theName ==minorScale[6] ? (
 
-    <TouchableOpacity style={{height: 40}}
+    <TouchableOpacity style={{height: 40, width:60}}
       key={index}
       onPress={event => {
         console.log(`${index}: ${theName}`);
@@ -404,7 +404,7 @@ useEffect(() => {
                     : minorScale.indexOf(theName) + mode == 0
                     ? "7"
                     : minorScale.indexOf(theName) + mode}</Text>
-    </TouchableOpacity>) : <TouchableOpacity style= {{opacity: 0, marginLeft: 27, }}
+    </TouchableOpacity>) : <TouchableOpacity style= {{opacity: 0, marginLeft: 24, flex:1, height:40, }}
       key={index}
       onPress={event => {
         console.log(`${index}: ${theName}`);
@@ -441,7 +441,7 @@ useEffect(() => {
 
 {/* <Text>{theName.map((x, index)=>{return x + index})}</Text> */}
 
-<View style={{display: 'flex', flexDirection: 'row', marginLeft: 22, }}>
+<View style={{display: 'flex', flexDirection: 'row', marginLeft: 24, }}>
 
 {theName.map((theName, index) => {
 
@@ -455,8 +455,7 @@ useEffect(() => {
     theName ==harmMinorScale[5] ||
     theName ==harmMinorScale[6] ? (
 
-    <TouchableOpacity style={{height: 40}}
-    
+    <TouchableOpacity style={{height: 40, width:60}}
       key={index}
       onPress={event => {
         console.log(`${index}: ${theName}`);
@@ -481,7 +480,7 @@ useEffect(() => {
                     : harmMinorScale.indexOf(theName) + mode}</Text>}  
 
      
-    </TouchableOpacity>) : <TouchableOpacity style= {{opacity: 0, marginLeft: 27, }}
+    </TouchableOpacity>) : <TouchableOpacity style= {{opacity: 0, marginLeft: 24,flex:1,height:40 }}
       key={index}
       onPress={event => {
         console.log(`${index}: ${theName}`);
@@ -1227,17 +1226,17 @@ return (
               console.log(mode, "new mode");
               checkMode();}}><Text style={styles.buttons}>Mode</Text></TouchableOpacity>
 
-<TouchableOpacity   onPress={()=>{console.log('major', major);setMajor(true);
+<TouchableOpacity   onPress={()=>{console.log('major', major);
               setMinor(false);
-              setHarmMinor(false);}}><Text style={styles.buttons}>Major{major}</Text></TouchableOpacity>
+              setHarmMinor(false);setMajor(true);}}><Text style={styles.buttons}>Major{major}</Text></TouchableOpacity>
 
-<TouchableOpacity style ={{flex: 1}} onPress={()=>{console.log('minor', minor);setMajor(false);
+<TouchableOpacity style ={{flex: 1}} onPress={()=>{console.log('minor', minor);setMajor(false); setHarmMinor(false)
               setMinor(true);
-              setHarmMinor(false);}}><Text style={styles.buttons}>Minor{minor}</Text></TouchableOpacity>
+              }}><Text style={styles.buttons}>Minor{minor}</Text></TouchableOpacity>
 
 <TouchableOpacity  style ={{flex: 1}}  onPress={()=>{console.log('Harmonic', harmMinor);setMajor(false);
-              setMinor(false);
-              setHarmMinor(true);}}><Text style={styles.buttons}>Harm.{harmMinor}</Text></TouchableOpacity>
+              
+              setMinor(false);setHarmMinor(true);}}><Text style={styles.buttons}>Harm.{harmMinor}</Text></TouchableOpacity>
               <TouchableOpacity  style ={{flex: 1}}  onPress={()=>{setFullFretBoard(prevState=>!prevState)}}>
                 <Text style={styles.buttons}>{fullFretBoard ? 'Position' : "Full"}{harmMinor}</Text></TouchableOpacity>
 
