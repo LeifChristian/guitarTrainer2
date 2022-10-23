@@ -2,27 +2,10 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import React from 'react'
 import { useState, useEffect} from "react"
 
-let row0;
-let row1;
-let row2;
-let row3;
-let row4;
-let row5;
-let row6;
-let row7;
-let row8;
-let row9;
-let row10;
-let row11;
-let row12;
-let row13;
-let row14;
-let row15;
-let row16;
-let row17;
-let row18;
-let row19;
-let row20;
+let row0;let row1;let row2;let row3;let row4;
+let row5;let row6;let row7;let row8;let row9;
+let row10;let row11;let row12;let row13;let row14;
+let row15;let row16;let row17;let row18;let row19;let row20;
 
 const row21 = ["C#", "F#", "B_", "E_", "G#", "C#"];
 const row22 = ["D_", "G_", "C_", "F_", "A_", "D_"];
@@ -30,34 +13,16 @@ const row22 = ["D_", "G_", "C_", "F_", "A_", "D_"];
 //base references the lowest pitch (E string) on a fret, i.e. fret 0 lowest pitch would be 40, fret 1, 41, etc.
 //this gives a simple equation to compute the pitches in each row (base+5=A string, base+10= D string)
 
-const base = 40;
-const base1 = 41;
-const base2 = 42;
-const base3 = 43;
-const base4 = 44;
-const base5 = 45;
-const base6 = 46;
-const base7 = 47;
-const base8 = 48;
-const base9 = 49;
-const base10 = 50;
-const base11 = 51;
-const base12 = 52;
-const base13 = 53;
-const base14 = 54;
-const base15 = 55;
-const base16 = 56;
-const base17 = 57;
-const base18 = 58;
-const base19 = 59;
-const base20 = 60;
-const base21 = 61;
-const base22 = 62;
+const base = 40;const base1 = 41;const base2 = 42;const base3 = 43;
+const base4 = 44;const base5 = 45;const base6 = 46;const base7 = 47;
+const base8 = 48;const base9 = 49;const base10 = 50; const base11 = 51;
+const base12 = 52;const base13 = 53;const base14 = 54;const base15 = 55;
+const base16 = 56;const base17 = 57;const base18 = 58;const base19 = 59;
+const base20 = 60;const base21 = 61;const base22 = 62;
 
 function App() {
 
   const [sharp, setSharp] = useState(true);
-
 
   switch (sharp) {
     case true:
@@ -285,16 +250,18 @@ useEffect(() => {
           break;
       }
     }
-  }, [position, scaleNumber, major, minor, harmMinor, modeName, sharp]);
+  }, [position, scaleNumber, major, modeName, sharp]);
 
   const renderRow = (theName, row) => {
 
     if(major){
       
-      return (<View style = {{marginLeft: "20%", marginTop: 5, width: '100%'}}>
+      return (<View style = {{marginTop: 5, width: '100%'}}>
       <Text
             style={{
+              marginLeft: '1%',
               fontWeight: "bold", 
+              fontSize: 14,
               marginBottom: -22,
             }}
           >
@@ -305,7 +272,7 @@ useEffect(() => {
 
 {/* <Text>{theName.map((x, index)=>{return x + index})}</Text> */}
 
-<View style={{display: 'flex', flexDirection: 'row', marginLeft: 22, }}>
+<View style={{display: 'flex', flexDirection: 'row', marginLeft: 24, }}>
 
 {theName.map((theName, index) => {
 
@@ -325,7 +292,7 @@ useEffect(() => {
         console.log(`${index}: ${item}`);
       }}
     >
-      <Text>  {theName.charAt(1) == "_" ? theName.charAt(0) + "_" : theName}{majorScale.indexOf(theName) + mode == -6
+      <Text style={styles.buttons3}>  {theName.charAt(1) == "_" ? theName.charAt(0) + "_" : theName}{majorScale.indexOf(theName) + mode == -6
                     ? "1"
                     : majorScale.indexOf(theName) + mode == -5
                     ? "2"
@@ -340,7 +307,7 @@ useEffect(() => {
                     : majorScale.indexOf(theName) + mode == 0
                     ? "7"
                     : majorScale.indexOf(theName) + mode}</Text>
-    </TouchableOpacity>) : <TouchableOpacity style= {{opacity: 0}}
+    </TouchableOpacity>) : <TouchableOpacity style= {{opacity: 0, marginLeft: 27, }}
       key={index}
       onPress={event => {
         console.log(`${index}: ${item}`);
@@ -440,8 +407,8 @@ useEffect(() => {
           >
             {row}
           </Text>
-{/* {theName.map((namey)=> {console.log(namey); return( <Text>dildo</Text>)})} */}
 
+{/* {theName.map((namey)=> {console.log(namey); return( <Text>dildo</Text>)})} */}
 
 {/* <Text>{theName.map((x, index)=>{return x + index})}</Text> */}
 
@@ -460,12 +427,15 @@ useEffect(() => {
     theName ==harmMinorScale[6] ? (
 
     <TouchableOpacity
+    style={styles.buttons2}
       key={index}
       onPress={event => {
         console.log(`${index}: ${item}`);
       }}
     >
-      <Text>  {theName.charAt(1) == "_" ? theName.charAt(0) + "_" : theName}{harmMinorScale.indexOf(theName) + mode == -6
+
+{theName == "F_" && harmMinorScale[6] == "F_" ?  <Text>E##7</Text>: theName == "G_" && harmMinorScale[6] == "G_" ?  <Text>F##7</Text>  : theName == "C_" && harmMinorScale[6] == "C_" ?
+<Text>B#7</Text> : theName == "G_" && harmMinorScale[6] == "G_" ? <Text>F##7</Text> : <Text> {theName.charAt(1) == "_" ? theName.charAt(0) + "_" : theName}{harmMinorScale.indexOf(theName) + mode == -6
                     ? "1"
                     : harmMinorScale.indexOf(theName) + mode == -5
                     ? "2"
@@ -479,7 +449,9 @@ useEffect(() => {
                     ? "6"
                     : harmMinorScale.indexOf(theName) + mode == 0
                     ? "7"
-                    : harmMinorScale.indexOf(theName) + mode}</Text>
+                    : harmMinorScale.indexOf(theName) + mode}</Text>}  
+
+     
     </TouchableOpacity>) : <TouchableOpacity style= {{opacity: 0}}
       key={index}
       onPress={event => {
@@ -1084,39 +1056,39 @@ return (
 {renderRow(row19,19)}
 {renderRow(row20,20)}
 
-<View style={{display:'flex', flexDirection:'row', marginTop: '6%', marginLeft: "14%"}}>
+<View style={{display:'flex', flexDirection:'row', marginTop: '6%', marginLeft: "4%", marginRight: "4%"}}>
 
-<TouchableOpacity style ={{flex: 1}} onPress={()=>{console.log('posdn', position); if(position > 1) setPosition((prevState) => prevState - 1);}}>
-    <Text>Position Down</Text></TouchableOpacity>
+<TouchableOpacity style={{flex: 1}} onPress={()=>{console.log('posdn', position); if(position > 1) setPosition((prevState) => prevState - 1);}}>
+    <Text style={styles.buttons}>PosDown</Text></TouchableOpacity>
 
 <TouchableOpacity style ={{flex: 1}}  onPress={()=>{ console.log('posup', position); if (position < 19) setPosition((prevState) => prevState + 1);}}>
-  <Text>Position Up</Text></TouchableOpacity>
+  <Text style={styles.buttons}>PosUp</Text></TouchableOpacity>
 
   <TouchableOpacity style ={{flex: 1}}  onPress={()=>{console.log('keydn', scaleNumber);if (scaleNumber > 0) setScaleNumber(scaleNumber - 1);}}>
-  <Text>KeyDn</Text></TouchableOpacity>
+  <Text style={styles.buttons}>KeyDn</Text></TouchableOpacity>
 
   <TouchableOpacity style ={{flex: 1}}  onPress={()=>{console.log('keyup', scaleNumber);if (scaleNumber < 11) setScaleNumber(scaleNumber + 1);}}>
-  <Text>KeyUp</Text></TouchableOpacity>
+  <Text style={styles.buttons}>KeyUp</Text></TouchableOpacity>
 
   </View>
 
-  <View  style={{display:'flex', flexDirection:'row', marginTop: '2%', marginLeft: "14%"}}>
+  <View  style={{display:'flex', flexDirection:'row', marginTop: '6%', marginLeft: "4%", marginRight: "4%"}}>
 
   <TouchableOpacity style ={{flex: 1}}  onPress={()=>{console.log('Mode', mode);setMode(mode - 1);
               console.log(mode, "new mode");
-              checkMode();}}><Text>Mode</Text></TouchableOpacity>
+              checkMode();}}><Text style={styles.buttons}>Mode</Text></TouchableOpacity>
 
-<TouchableOpacity style ={{flex: 1}}  onPress={()=>{console.log('major', major);setMajor(true);
+<TouchableOpacity   onPress={()=>{console.log('major', major);setMajor(true);
               setMinor(false);
-              setHarmMinor(false);}}><Text>Major{major}</Text></TouchableOpacity>
+              setHarmMinor(false);}}><Text style={styles.buttons}>Major{major}</Text></TouchableOpacity>
 
-<TouchableOpacity style ={{flex: 1}}   onPress={()=>{console.log('minor', minor);setMajor(false);
+<TouchableOpacity style ={{flex: 1}} onPress={()=>{console.log('minor', minor);setMajor(false);
               setMinor(true);
-              setHarmMinor(false);}}><Text>Minor{minor}</Text></TouchableOpacity>
+              setHarmMinor(false);}}><Text style={styles.buttons}>Minor{minor}</Text></TouchableOpacity>
 
 <TouchableOpacity  style ={{flex: 1}}  onPress={()=>{console.log('Harmonic', harmMinor);setMajor(false);
               setMinor(false);
-              setHarmMinor(true);}}><Text>Harmonic{harmMinor}</Text></TouchableOpacity>
+              setHarmMinor(true);}}><Text style={styles.buttons}>Harmonic{harmMinor}</Text></TouchableOpacity>
 
   </View>
 
@@ -1134,4 +1106,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+
+  buttons: {
+    color: 'white', backgroundColor: 'black', marginRight: '5%', marginLeft: '5%', textAlign: 'center',
+    borderRadius: 12, fontWeight: "700", padding: 2
+  },
+
+  buttons2: {
+
+    color: 'white', backgroundColor: 'black', marginRight: '5%', marginLeft: '0%', textAlign: 'center',
+    borderRadius: 12, fontWeight: "700", padding: 4
+  },
+
+  buttons3: {
+    color: 'white', backgroundColor: 'black', marginRight: '5%', marginLeft: '0%', textAlign: 'center',
+    borderRadius: 12, fontWeight: "700", padding: 4, 
+  },
+
+
 });
