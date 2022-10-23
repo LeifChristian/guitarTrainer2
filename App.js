@@ -88,7 +88,7 @@ const [mode, setMode] = useState(1); // mode 1=Ionian, 0=dorian, -1=phrygian, -2
 const [modeName, setModeName] = useState("Ionian/Root");
 const [position, setPosition] = useState(1);
 const [scaleNumber, setScaleNumber] = useState(0); //scale numbers begin with E=0, F=1, etc until 11
-const [fullFretBoard, setFullFretBoard] = useState(true);
+const [fullFretBoard, setFullFretBoard] = useState(false);
 
 useEffect(() => {
     console.log("refresh");
@@ -259,7 +259,7 @@ useEffect(() => {
 
     if(major){
       
-      return (<View style = {{marginTop: 5, width: '100%'}}>
+      return (<View style = {{marginTop: 5, width: '100%',}}>
       <Text
             style={{
               marginLeft: '1%',
@@ -291,7 +291,7 @@ useEffect(() => {
 
       theName == "F_" && majorScale[6] == "F_" ?   
               
-      <TouchableOpacity
+      <TouchableOpacity style={{height: 40}}
       key={index}
       onPress={event => {
         console.log(`${index}: ${theName}`);
@@ -302,7 +302,7 @@ useEffect(() => {
           
           : theName == "C_" && majorScale[6] == "C_" ?   
               
-          <TouchableOpacity
+          <TouchableOpacity style={{height: 40}}
           key={index}
           onPress={event => {
             console.log(`${index}: ${theName}`);
@@ -311,7 +311,7 @@ useEffect(() => {
           <Text style={styles.buttons3}>B#7</Text>
         </TouchableOpacity>
               :
-    <TouchableOpacity
+    <TouchableOpacity style={{height: 40}}
       key={index}
       onPress={event => {
         console.log(`${index}: ${theName}`);
@@ -353,9 +353,11 @@ useEffect(() => {
 
     else if(minor){
       
-      return (<View style = {{marginLeft: "20%", marginTop: 5, width: '100%'}}>
+      return (<View style = {{marginTop: 5, width: '100%'}}>
       <Text
             style={{
+              marginLeft: 1,
+              fontSize:14,
               fontWeight: "bold", 
               marginBottom: -22,
             }}
@@ -367,7 +369,7 @@ useEffect(() => {
 
 {/* <Text>{theName.map((x, index)=>{return x + index})}</Text> */}
 
-<View style={{display: 'flex', flexDirection: 'row', marginLeft: 22, }}>
+<View style={{display: 'flex', flexDirection: 'row', marginLeft: 24, }}>
 
 {theName.map((theName, index) => {
 
@@ -381,13 +383,13 @@ useEffect(() => {
     theName ==minorScale[5] ||
     theName ==minorScale[6] ? (
 
-    <TouchableOpacity
+    <TouchableOpacity style={{height: 40}}
       key={index}
       onPress={event => {
         console.log(`${index}: ${theName}`);
       }}
     >
-      <Text>  {theName.charAt(1) == "_" ? theName.charAt(0) + "_" : theName}{majorScale.indexOf(theName) + mode == -6
+      <Text style={styles.buttons3}>  {theName.charAt(1) == "_" ? theName.charAt(0) + "_" : theName}{majorScale.indexOf(theName) + mode == -6
                     ? "1"
                     : minorScale.indexOf(theName) + mode == -5
                     ? "2"
@@ -402,7 +404,7 @@ useEffect(() => {
                     : minorScale.indexOf(theName) + mode == 0
                     ? "7"
                     : minorScale.indexOf(theName) + mode}</Text>
-    </TouchableOpacity>) : <TouchableOpacity style= {{opacity: 0}}
+    </TouchableOpacity>) : <TouchableOpacity style= {{opacity: 0, marginLeft: 27, }}
       key={index}
       onPress={event => {
         console.log(`${index}: ${theName}`);
@@ -423,10 +425,12 @@ useEffect(() => {
 
     else if(harmMinor){
       
-      return (<View style = {{marginLeft: "20%", marginTop: 5, width: '100%'}}>
+      return (<View style = {{ marginTop: 5, width: '100%'}}>
       <Text
             style={{
+              marginLeft: '1%',
               fontWeight: "bold", 
+              fontSize: 14,
               marginBottom: -22,
             }}
           >
@@ -451,16 +455,16 @@ useEffect(() => {
     theName ==harmMinorScale[5] ||
     theName ==harmMinorScale[6] ? (
 
-    <TouchableOpacity
-    style={styles.buttons2}
+    <TouchableOpacity style={{height: 40}}
+    
       key={index}
       onPress={event => {
         console.log(`${index}: ${theName}`);
       }}
     >
 
-{theName == "F_" && harmMinorScale[6] == "F_" ?  <Text>E##7</Text>: theName == "G_" && harmMinorScale[6] == "G_" ?  <Text>F##7</Text>  : theName == "C_" && harmMinorScale[6] == "C_" ?
-<Text>B#7</Text> : theName == "G_" && harmMinorScale[6] == "G_" ? <Text>F##7</Text> : <Text> {theName.charAt(1) == "_" ? theName.charAt(0) + "_" : theName}{harmMinorScale.indexOf(theName) + mode == -6
+{theName == "F_" && harmMinorScale[6] == "F_" ?  <Text style={styles.buttons3}>E##7</Text>: theName == "G_" && harmMinorScale[6] == "G_" ?  <Text style={styles.buttons3}>F##7</Text>  : theName == "C_" && harmMinorScale[6] == "C_" ?
+<Text style={styles.buttons3}>B#7</Text> : theName == "G_" && harmMinorScale[6] == "G_" ? <Text style={styles.buttons3}>F##7</Text> : <Text style={styles.buttons3}> {theName.charAt(1) == "_" ? theName.charAt(0) + "_" : theName}{harmMinorScale.indexOf(theName) + mode == -6
                     ? "1"
                     : harmMinorScale.indexOf(theName) + mode == -5
                     ? "2"
@@ -477,7 +481,7 @@ useEffect(() => {
                     : harmMinorScale.indexOf(theName) + mode}</Text>}  
 
      
-    </TouchableOpacity>) : <TouchableOpacity style= {{opacity: 0}}
+    </TouchableOpacity>) : <TouchableOpacity style= {{opacity: 0, marginLeft: 27, }}
       key={index}
       onPress={event => {
         console.log(`${index}: ${theName}`);
@@ -496,11 +500,10 @@ useEffect(() => {
     
     }
 
-     
 else return <Text style={{marginTop: '2%'}}>NO</Text>
   };
 
-  const press = (index, row) => {
+  const press = (index, row) =>{
     console.log(row, index);
 
     switch (row) {
@@ -1057,27 +1060,23 @@ else return <Text style={{marginTop: '2%'}}>NO</Text>
     pitchesPressed = []
 
     let rangeOfPitches = 13;
-
     let numberOfPitches = 7;
+    let speedOfPlayback = 500;
 
     for(let i=0; i<numberOfPitches; i++){       
 
-    let myTicket= 
-Math.floor(Math.random() * rangeOfPitches) + 1;
-generatedPitches.push(myTicket.toFixed(0))
+    let myTicket= Math.floor(Math.random() * rangeOfPitches) + 1;
+        generatedPitches.push(myTicket.toFixed(0))
     }
 
     // console.log(typeof(generatedPitches[0]))
 
     console.log(generatedPitches, "pitches")
-
     for (var i = 0; i <generatedPitches.length; i++) {
             (function(index) {
                 setTimeout(function() { console.log(generatedPitches[index]); 
 
-
-                    if(scaleSchema == 'A'){
-                    
+                    if(major){
                     generatedPitches[0]= '1'; // force first pitch to root.
                     if(generatedPitches[index]=="2"){generatedPitches[index]='3'}
                     if(generatedPitches[index]=='4'){generatedPitches[index]='5'}
@@ -1085,24 +1084,22 @@ generatedPitches.push(myTicket.toFixed(0))
                     if(generatedPitches[index]=='9'){generatedPitches[index]='10'}
                     if(generatedPitches[index]=='11'){generatedPitches[index]='12'}}
 
-                    if(scaleSchema=="Amin"){
+                    if(minor){
                             generatedPitches[0]= '1'; 
                             if(generatedPitches[index]=="2"){generatedPitches[index]='3'}
                             if(generatedPitches[index]=='5'){generatedPitches[index]='4'}
                             if(generatedPitches[index]=='7'){generatedPitches[index]='8'}
                             if(generatedPitches[index]=='10'){generatedPitches[index]='9'}
                             if(generatedPitches[index]=='12'){generatedPitches[index]='11'}
-
                     }
 
-                    if(scaleSchema=="AminHarm"){
+                    if(harmMinor){
                             generatedPitches[0]= '1'; 
                             if(generatedPitches[index]=="2"){generatedPitches[index]='3'}
                             if(generatedPitches[index]=='5'){generatedPitches[index]='4'}
                             if(generatedPitches[index]=='7'){generatedPitches[index]='8'}
                             if(generatedPitches[index]=='10'){generatedPitches[index]='9'}
                             if(generatedPitches[index]=='11'){generatedPitches[index]='12'}
-
                     }
 
                     // let myTime= 
@@ -1110,7 +1107,8 @@ generatedPitches.push(myTicket.toFixed(0))
                     // generatedPitches.push(myTime.toFixed(0));
                     // console.log(myTime, 'time');
                     
-                    buttonPress(`${generatedPitches[index]}`)}, i * 500);
+                    press(`${generatedPitches[index]}`)}, i * speedOfPlayback);
+
             })(i);
 
             console.log(generatedPitches, 'gen');
@@ -1118,8 +1116,22 @@ generatedPitches.push(myTicket.toFixed(0))
         }
 
   isItGenerated = true;
-}
+}//
 
+const repeat = () => {
+  let speedOfPlayback = 500;
+  for (var i = 0; i <generatedPitches.length; i++) {
+          (function(index) {
+              setTimeout(function() { console.log(generatedPitches[index]); 
+                  
+                  press(`${generatedPitches[index]}`)}, i * speedOfPlayback);
+          })(i);
+
+          console.log(generatedPitches, 'gen');
+         
+      }
+
+}
 
   let rowrender1 = `row${position - 1}`;
   let rowrender2 = `row${position}`;
@@ -1128,6 +1140,7 @@ generatedPitches.push(myTicket.toFixed(0))
   let rowrender5 = `row${position + 3}`;
 
 return (
+
 <View style={{marginTop: 90}}>
 <Text style={{marginTop:"-7%"}}> Position: {position}, Key:{" "}
           {major
@@ -1138,29 +1151,61 @@ return (
             ? harmMinorScale[0]
             : null}
           {major ? " major" : minor ? " minor" : harmMinor ? " harmonic" : null}</Text>
-{renderRow(row0, 0)}
-{renderRow(row1, 1)}
-{renderRow(row2,2)}
-{renderRow(row3,3)}
-{renderRow(row4,4)}
-{renderRow(row5,5)}
-{renderRow(row6,6)}
-{renderRow(row7,7)}
-{renderRow(row8,8)}
-{renderRow(row9,9)}
-{renderRow(row10,10)}
-{renderRow(row11,11)}
-{renderRow(row12,12)}
-{renderRow(row13,13)}
-{renderRow(row14,14)}
-{renderRow(row15,15)}
-{renderRow(row16,16)}
-{renderRow(row17,17)}
-{renderRow(row18,18)}
-{renderRow(row19,19)}
-{renderRow(row20,20)}
+{fullFretBoard ?<>
+<View style={styles.borderBox1}>
+{renderRow(row0, 0)}</View>
+<View style={styles.borderBox1}>
+{renderRow(row1, 1)}</View>
+<View style={styles.borderBox1}>
+{renderRow(row2,2)}</View>
+<View style={styles.borderBox1}>
+{renderRow(row3,3)}</View>
+<View style={styles.borderBox1}>
+{renderRow(row4,4)}</View>
+<View style={styles.borderBox1}>
+{renderRow(row5,5)}</View>
+<View style={styles.borderBox1}>
+{renderRow(row6,6)}</View>
+<View style={styles.borderBox1}>
+{renderRow(row7,7)}</View>
+<View style={styles.borderBox1}>
+{renderRow(row8,8)}</View>
+<View style={styles.borderBox1}>
+{renderRow(row9,9)}</View>
+<View style={styles.borderBox1}>
+{renderRow(row10,10)}</View>
+<View style={styles.borderBox1}>
+{renderRow(row11,11)}</View>
+<View style={styles.borderBox1}>
+{renderRow(row12,12)}</View>
+<View style={styles.borderBox1}>
+{renderRow(row13,13)}</View>
+<View style={styles.borderBox1}>
+{renderRow(row14,14)}</View>
+<View style={styles.borderBox1}>
+{renderRow(row15,15)}</View>
+<View style={styles.borderBox1}>
+{renderRow(row16,16)}</View>
+<View style={styles.borderBox1}>
+{renderRow(row17,17)}</View>
+<View style={styles.borderBox1}>
+{renderRow(row18,18)}</View>
+<View style={styles.borderBox1}>
+{renderRow(row19,19)}</View>
+<View style={styles.borderBox1}>
+{renderRow(row20,20)}</View></> : 
+                <>
+                  <View style={{borderColor: 'black',
+                borderWidth: 2,height: 40}}>{renderRow(eval(rowrender1), position - 1)}</View>
+                
+                  <View style={styles.borderBox}>{renderRow(eval(rowrender2), position)}</View>
+                <View style={styles.borderBox}>{renderRow(eval(rowrender3), position + 1)}</View>
+                <View style={styles.borderBox}>
+                {renderRow(eval(rowrender4), position + 2)}</View>
+                <View style={styles.borderBox}>
+                {renderRow(eval(rowrender5), position + 3)}</View></>} 
 
-<View style={{display:'flex', flexDirection:'row', marginTop: '6%', marginLeft: "4%", marginRight: "4%"}}>
+<View style={{display:'flex', flexDirection:'row', marginTop: '2%', marginLeft: "4%", marginRight: "4%"}}>
 
 <TouchableOpacity style={{flex: 1}} onPress={()=>{console.log('posdn', position); if(position > 1) setPosition((prevState) => prevState - 1);}}>
     <Text style={styles.buttons}>PosDown</Text></TouchableOpacity>
@@ -1176,7 +1221,7 @@ return (
 
   </View>
 
-  <View  style={{display:'flex', flexDirection:'row', marginTop: '6%', marginLeft: "4%", marginRight: "4%"}}>
+  <View  style={{display:'flex', flexDirection:'row', marginTop: '2%', marginLeft: "4%", marginRight: "4%"}}>
 
   <TouchableOpacity style ={{flex: 1}}  onPress={()=>{console.log('Mode', mode);setMode(mode - 1);
               console.log(mode, "new mode");
@@ -1192,7 +1237,9 @@ return (
 
 <TouchableOpacity  style ={{flex: 1}}  onPress={()=>{console.log('Harmonic', harmMinor);setMajor(false);
               setMinor(false);
-              setHarmMinor(true);}}><Text style={styles.buttons}>Harmonic{harmMinor}</Text></TouchableOpacity>
+              setHarmMinor(true);}}><Text style={styles.buttons}>Harm.{harmMinor}</Text></TouchableOpacity>
+              <TouchableOpacity  style ={{flex: 1}}  onPress={()=>{setFullFretBoard(prevState=>!prevState)}}>
+                <Text style={styles.buttons}>{fullFretBoard ? 'Position' : "Full"}{harmMinor}</Text></TouchableOpacity>
 
   </View>
 
@@ -1202,7 +1249,6 @@ return (
 
 export default App;
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -1210,6 +1256,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+
+  borderBox1: {borderColor: 'black',
+  borderWidth: 2, height: 33, marginTop: -1.7},
+  borderBox: {borderColor: 'black',
+  borderWidth: 2, height: 40, marginTop: -1.7},
 
   buttons: {
     color: 'white', backgroundColor: 'black', marginRight: '5%', marginLeft: '5%', textAlign: 'center',
