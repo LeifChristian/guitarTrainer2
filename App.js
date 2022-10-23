@@ -7,6 +7,10 @@ let row5;let row6;let row7;let row8;let row9;
 let row10;let row11;let row12;let row13;let row14;
 let row15;let row16;let row17;let row18;let row19;let row20;
 
+let pitchesPressed = [];
+let generatedPitches = [];
+let isItGenerated = false;
+
 const row21 = ["C#", "F#", "B_", "E_", "G#", "C#"];
 const row22 = ["D_", "G_", "C_", "F_", "A_", "D_"];
 
@@ -21,7 +25,6 @@ const base16 = 56;const base17 = 57;const base18 = 58;const base19 = 59;
 const base20 = 60;const base21 = 61;const base22 = 62;
 
 function App() {
-
   const [sharp, setSharp] = useState(true);
 
   switch (sharp) {
@@ -286,10 +289,32 @@ useEffect(() => {
     theName ==majorScale[5] ||
     theName ==majorScale[6] ? (
 
+      theName == "F_" && majorScale[6] == "F_" ?   
+              
+      <TouchableOpacity
+      key={index}
+      onPress={event => {
+        console.log(`${index}: ${theName}`);
+      }}
+    >
+      <Text style={styles.buttons3}>  E#7</Text>
+    </TouchableOpacity>
+          
+          : theName == "C_" && majorScale[6] == "C_" ?   
+              
+          <TouchableOpacity
+          key={index}
+          onPress={event => {
+            console.log(`${index}: ${theName}`);
+          }}
+        >
+          <Text style={styles.buttons3}>B#7</Text>
+        </TouchableOpacity>
+              :
     <TouchableOpacity
       key={index}
       onPress={event => {
-        console.log(`${index}: ${item}`);
+        console.log(`${index}: ${theName}`);
       }}
     >
       <Text style={styles.buttons3}>  {theName.charAt(1) == "_" ? theName.charAt(0) + "_" : theName}{majorScale.indexOf(theName) + mode == -6
@@ -310,7 +335,7 @@ useEffect(() => {
     </TouchableOpacity>) : <TouchableOpacity style= {{opacity: 0, marginLeft: 27, }}
       key={index}
       onPress={event => {
-        console.log(`${index}: ${item}`);
+        console.log(`${index}: ${theName}`);
       }}
     >
       <Text>  {theName.charAt(1) == "_" ? theName.charAt(0) + "_" : theName}{majorScale.indexOf(theName) + mode}
@@ -359,7 +384,7 @@ useEffect(() => {
     <TouchableOpacity
       key={index}
       onPress={event => {
-        console.log(`${index}: ${item}`);
+        console.log(`${index}: ${theName}`);
       }}
     >
       <Text>  {theName.charAt(1) == "_" ? theName.charAt(0) + "_" : theName}{majorScale.indexOf(theName) + mode == -6
@@ -380,7 +405,7 @@ useEffect(() => {
     </TouchableOpacity>) : <TouchableOpacity style= {{opacity: 0}}
       key={index}
       onPress={event => {
-        console.log(`${index}: ${item}`);
+        console.log(`${index}: ${theName}`);
       }}
     >
       <Text>  {theName.charAt(1) == "_" ? theName.charAt(0) + "_" : theName}{minorScale.indexOf(theName) + mode}
@@ -396,7 +421,7 @@ useEffect(() => {
     
     }
 
-    else  if(harmMinor){
+    else if(harmMinor){
       
       return (<View style = {{marginLeft: "20%", marginTop: 5, width: '100%'}}>
       <Text
@@ -430,7 +455,7 @@ useEffect(() => {
     style={styles.buttons2}
       key={index}
       onPress={event => {
-        console.log(`${index}: ${item}`);
+        console.log(`${index}: ${theName}`);
       }}
     >
 
@@ -455,7 +480,7 @@ useEffect(() => {
     </TouchableOpacity>) : <TouchableOpacity style= {{opacity: 0}}
       key={index}
       onPress={event => {
-        console.log(`${index}: ${item}`);
+        console.log(`${index}: ${theName}`);
       }}
     >
       <Text>  {theName.charAt(1) == "_" ? theName.charAt(0) + "_" : theName}{harmMinorScale.indexOf(theName) + mode}
@@ -1026,6 +1051,76 @@ else return <Text style={{marginTop: '2%'}}>NO</Text>
     } else setModeName(mode);
   };
 
+  const generate = () => {
+
+    generatedPitches = []
+    pitchesPressed = []
+
+    let rangeOfPitches = 13;
+
+    let numberOfPitches = 7;
+
+    for(let i=0; i<numberOfPitches; i++){       
+
+    let myTicket= 
+Math.floor(Math.random() * rangeOfPitches) + 1;
+generatedPitches.push(myTicket.toFixed(0))
+    }
+
+    // console.log(typeof(generatedPitches[0]))
+
+    console.log(generatedPitches, "pitches")
+
+    for (var i = 0; i <generatedPitches.length; i++) {
+            (function(index) {
+                setTimeout(function() { console.log(generatedPitches[index]); 
+
+
+                    if(scaleSchema == 'A'){
+                    
+                    generatedPitches[0]= '1'; // force first pitch to root.
+                    if(generatedPitches[index]=="2"){generatedPitches[index]='3'}
+                    if(generatedPitches[index]=='4'){generatedPitches[index]='5'}
+                    if(generatedPitches[index]=='7'){generatedPitches[index]='8'}
+                    if(generatedPitches[index]=='9'){generatedPitches[index]='10'}
+                    if(generatedPitches[index]=='11'){generatedPitches[index]='12'}}
+
+                    if(scaleSchema=="Amin"){
+                            generatedPitches[0]= '1'; 
+                            if(generatedPitches[index]=="2"){generatedPitches[index]='3'}
+                            if(generatedPitches[index]=='5'){generatedPitches[index]='4'}
+                            if(generatedPitches[index]=='7'){generatedPitches[index]='8'}
+                            if(generatedPitches[index]=='10'){generatedPitches[index]='9'}
+                            if(generatedPitches[index]=='12'){generatedPitches[index]='11'}
+
+                    }
+
+                    if(scaleSchema=="AminHarm"){
+                            generatedPitches[0]= '1'; 
+                            if(generatedPitches[index]=="2"){generatedPitches[index]='3'}
+                            if(generatedPitches[index]=='5'){generatedPitches[index]='4'}
+                            if(generatedPitches[index]=='7'){generatedPitches[index]='8'}
+                            if(generatedPitches[index]=='10'){generatedPitches[index]='9'}
+                            if(generatedPitches[index]=='11'){generatedPitches[index]='12'}
+
+                    }
+
+                    // let myTime= 
+                    // Math.floor(Math.random() * 7) + 1;r
+                    // generatedPitches.push(myTime.toFixed(0));
+                    // console.log(myTime, 'time');
+                    
+                    buttonPress(`${generatedPitches[index]}`)}, i * 500);
+            })(i);
+
+            console.log(generatedPitches, 'gen');
+           
+        }
+
+  isItGenerated = true;
+}
+
+
   let rowrender1 = `row${position - 1}`;
   let rowrender2 = `row${position}`;
   let rowrender3 = `row${position + 1}`;
@@ -1034,6 +1129,15 @@ else return <Text style={{marginTop: '2%'}}>NO</Text>
 
 return (
 <View style={{marginTop: 90}}>
+<Text style={{marginTop:"-7%"}}> Position: {position}, Key:{" "}
+          {major
+            ? majorScale[0]
+            : minor
+            ? minorScale[0]
+            : harmMinor
+            ? harmMinorScale[0]
+            : null}
+          {major ? " major" : minor ? " minor" : harmMinor ? " harmonic" : null}</Text>
 {renderRow(row0, 0)}
 {renderRow(row1, 1)}
 {renderRow(row2,2)}
